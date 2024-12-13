@@ -5,6 +5,7 @@ on:
       - main
       - master
       - dev
+      - Altoro-3.4
 jobs:
   build:
     runs-on: ubuntu-latest
