@@ -1,15 +1,20 @@
-name: "HCL AppScan SAST"
+name: Checkmarx One Scan
 on:
-  push
+  push:
+    branches:
+      - main
+      - master
+      - dev
 jobs:
-  scan:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Run AppScan SAST scan
-        uses: HCL-TECH-SOFTWARE/appscan-sast-action@v1.0.6
+        uses: actions/checkout@v2
+      - name: Checkmarx One CLI Action
+        uses: checkmarx/ast-github-action@main #Github Action version
         with:
-          asoc_key: ${{secrets.ASOC_KEY}}
-          asoc_secret: ${{secrets.ASOC_SECRET}}
-          application_id: d590bc40-5823-4ed8-93e8-af8daa6e5ec0
+          cx_tenant: sudha
+          base_uri: https://ind.ast.checkmarx.net/
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
